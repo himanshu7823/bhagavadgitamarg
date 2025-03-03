@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>भगवद्गीता का मार्ग - प्रीमियम डैशबोर्ड</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      color: #fff;
+    }
+    .dashboard-container {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 0 2px #ffd700;
+      padding: 40px;
+      max-width: 900px;
+      width: 90%;
+      backdrop-filter: blur(10px);
+      border: 1px solid #ffd700;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .dashboard-container:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 0 3px #ffd700;
+    }
+    h1 {
+      color: #ffd700;
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 700;
+      font-size: 2.5rem;
+      text-shadow: 0 2px 5px rgba(255, 215, 0, 0.5);
+    }
+    .book-title {
+      color: #ffd700;
+      text-align: center;
+      margin-bottom: 20px;
+      font-family: 'Georgia', serif;
+      font-weight: 600;
+      font-size: 1.8rem;
+      text-shadow: 0 2px 8px rgba(255, 215, 0, 0.8);
+      animation: glow 3s ease-in-out infinite;
+    }
+    @keyframes glow {
+      0% { text-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700, 0 0 15px #ffd700; }
+      50% { text-shadow: 0 0 10px #e6b800, 0 0 20px #e6b800, 0 0 25px #e6b800; }
+      100% { text-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700, 0 0 15px #ffd700; }
+    }
+    .premium-note, .referral-system {
+      background: rgba(255, 215, 0, 0.1);
+      border: 2px dashed #ffd700;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+      color: #ffd700;
+      text-align: center;
+    }
+    .payment-note {
+      background: rgba(255, 215, 0, 0.15);
+      border: 2px solid #ffd700;
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      font-size: 1rem;
+      color: #ffd700;
+      text-align: center;
+      font-family: 'Georgia', serif;
+      font-weight: 500;
+      line-height: 1.6;
+      text-shadow: 0 1px 3px rgba(255, 215, 0, 0.7);
+      animation: fadeIn 1.5s ease-in-out infinite alternate;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0.8; }
+      to { opacity: 1; }
+    }
+    .content-section {
+      margin-bottom: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      border: 1px solid #ffd700;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .content-section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+    }
+    .btn-primary {
+      background-color: #ffd700;
+      border: none;
+      padding: 12px 30px;
+      font-size: 16px;
+      border-radius: 10px;
+      color: #1a1a1a;
+      font-weight: 600;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .btn-primary:hover {
+      background-color: #e6b800;
+      transform: translateY(-3px);
+    }
+    .btn-danger {
+      background-color: #e74c3c;
+      border: none;
+      padding: 12px 30px;
+      font-size: 16px;
+      border-radius: 10px;
+      color: #fff;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .btn-danger:hover {
+      background-color: #c0392b;
+      transform: translateY(-3px);
+    }
+    .btn-warning {
+      background-color: #f1c40f;
+      border: none;
+      padding: 12px 30px;
+      font-size: 16px;
+      border-radius: 10px;
+      color: #1a1a1a;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .btn-warning:hover {
+      background-color: #d4a017;
+      transform: translateY(-3px);
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-control {
+      border-radius: 10px;
+      border: 1px solid #ffd700;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .form-control:focus {
+      border-color: #e6b800;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    .info-text {
+      color: #fff;
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+    .referral-table {
+      width: 100%;
+      margin-top: 20px;
+      background: rgba(255, 215, 0, 0.05);
+      border-radius: 10px;
+      padding: 15px;
+      border: 1px solid #ffd700;
+    }
+    .referral-table th, .referral-table td {
+      padding: 10px;
+      text-align: center;
+      color: #ffd700;
+    }
+    .referral-table th {
+      background: rgba(255, 215, 0, 0.2);
+      font-weight: 600;
+    }
+    .referral-details {
+      margin-top: 10px;
+      font-size: 1.1rem;
+      color: #ffd700;
+    }
+    .accordion-button {
+      color: #ffd700;
+      background: rgba(255, 215, 0, 0.1);
+      border: 1px solid #ffd700;
+    }
+    .accordion-button:not(.collapsed) {
+      color: #1a1a1a;
+      background: #ffd700;
+    }
+    .accordion-body {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid #ffd700;
+      border-top: none;
+    }
+    .bhagavad-gita-content {
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <h1>भगवद्गीता का मार्ग - प्रीमियम डैशबोर्ड</h1>
+    <div id="premiumNote" class="premium-note">
+      <div class="payment-note">
+        <p>✨ <strong>फ्री की वस्तु का उपयोग नहीं होता और खरीदी गई वस्तु का उपयोग करना पड़ता है</strong> इसलिए हम ₹100 चार्ज कर रहे हैं। अगर किसी को फ्री में इस "भगवद्गीता के सार" को भेजने को कहेंगे, तो कोई नहीं करेगा। इसलिए सभी लोगों तक पहुंचाने के लिए कमीशन इस प्रकार दिया जाएगा:</p>
+        <p style="font-size: 1.1rem; font-weight: 600;">25%, 15%, 10%, 8%, 6%, 5%, 4%, 3%, 2%, 1% ताकि भगवद्गीता का प्रीमियम सार हर व्यक्ति तक पहुंचा जा सके।</p>
+      </div>
+      <h2 class="book-title">भगवद्गीता का प्रीमियम सार: जीवन और सफलता का मार्ग</h2>
+      <button onclick="makePayment()" class="btn btn-primary">100 रुपये में प्रीमियम बुक खरीदें</button>
+    </div>
+    <div id="userDashboard" style="display: none;">
+      <h2 style="color: #ffd700;">आपकी प्रीमियम जानकारी</h2>
+      <p style="color: #ffd700; font-size: 1.2rem;">आपका एक्सक्लूसिव रेफरल कोड: <span id="referCode"></span></p>
+      <p style="color: #ffd700; font-size: 1.2rem;">वॉलेट बैलेंस: <span id="walletBalance"></span> रुपये</p>
+      <p style="color: #ffd700; font-size: 1.2rem;">रेफरल से कमिशन: <span id="referralCommission"></span> रुपये</p>
+
+      <h2 class="mt-4" style="color: #ffd700;">आपका प्रीमियम रेफरल सिस्टम</h2>
+      <div class="referral-system">
+        <p style="color: #ffd700;">अपने रेफरल कोड शेयर करें और 10 लेवल तक कमिशन कमाएं:</p>
+        <table class="referral-table">
+          <thead>
+            <tr>
+              <th>लेवल</th>
+              <th>कमिशन (%)</th>
+            </tr>
+          </thead>
+          <tbody id="referralLevels">
+            <tr><td>1</td><td>25%</td></tr>
+            <tr><td>2</td><td>15%</td></tr>
+            <tr><td>3</td><td>10%</td></tr>
+            <tr><td>4</td><td>8%</td></tr>
+            <tr><td>5</td><td>6%</td></tr>
+            <tr><td>6</td><td>5%</td></tr>
+            <tr><td>7</td><td>4%</td></tr>
+            <tr><td>8</td><td>3%</td></tr>
+            <tr><td>9</td><td>2%</td></tr>
+            <tr><td>10</td><td>1%</td></tr>
+          </tbody>
+        </table>
+        <div id="referralDetails" class="referral-details"></div>
+        <p class="mt-2" style="color: #ffd700;">रेफरल लिंक: <code>https://bhagavadgitamarg.com/register?refer=${encodeURIComponent(localStorage.getItem('personalReferCode') || '')}</code></p>
+      </div>
+
+      <h2 class="mt-4" style="color: #ffd700;">भगवद्गीता का प्रीमियम सार</h2>
+      <div id="bhagavadGitaContent" class="content-section" style="display: none;">
+        <div class="accordion" id="gitaAccordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading1">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1" style="color: #ffd700; background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700;">
+                अध्याय 1: अर्जुन विषाद योग
+              </button>
+            </h2>
+            <div id="collapse1" class="accordion-collapse collapse" aria-labelledby="heading1" data-bs-parent="#gitaAccordion">
+              <div class="accordion-body bhagavad-gita-content">
+                <p>जीवन में संकट आने पर मन विचलित हो जाता है: अर्जुन युद्ध के मैदान में अपने परिजनों को देखकर दुखी और भ्रमित हो जाता है, जो दर्शाता है कि कठिन परिस्थितियों में मन की अस्थिरता स्वाभाविक है।</p>
+                <p>कर्तव्य और भावनाओं के बीच द्वंद्व स्वाभाविक है: अर्जुन को अपने कर्तव्य (युद्ध) और प्रियजनों के प्रति मोह के बीच संघर्ष होता है, जो जीवन में निर्णय लेने की जटिलता को दिखाता है।</p>
+                <p>युद्ध से पहले शक्ति और कमजोरी का आकलन जरूरी है: दुर्योधन और अर्जुन दोनों अपनी और शत्रु की सेना का मूल्यांकन करते हैं, जो किसी भी कार्य में तैयारी के महत्व को बताता है।</p>
+                <p>संदेह और भय हमें निर्णय लेने से रोकते हैं: अर्जुन का विषाद उसके भय और अनिश्चितता से उत्पन्न होता है, जो हमें सिखाता है कि संदेह को दूर करना आवश्यक है।</p>
+                <p>गुरु की शरण में जाना समाधान का पहला कदम है: अर्जुन श्रीकृष्ण से मार्गदर्शन माँगता है, जो बताता है कि संकट में गुरु या बुद्धिमान की सलाह लेनी चाहिए।</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading2">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2" style="color: #ffd700; background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700;">
+                अध्याय 2: सांख्य योग
+              </button>
+            </h2>
+            <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2" data-bs-parent="#gitaAccordion">
+              <div class="accordion-body bhagavad-gita-content">
+                <p>आत्मा अमर है, शरीर नश्वर; इस सत्य को समझो: श्रीकृष्ण अर्जुन को बताते हैं कि आत्मा कभी मरती नहीं, केवल शरीर बदलता है, इसलिए मृत्यु से डरना व्यर्थ है।</p>
+                <p>कर्म करो, फल की चिंता मत करो: कर्म पर अधिकार है, परिणाम पर नहीं; यह जीवन को तनावमुक्त और कर्मप्रधान बनाता है।</p>
+                <p>सुख-दुख समान भाव से स्वीकार करो: जीवन में उतार-चढ़ाव आते हैं, इन्हें समभाव से देखने से मन शांत रहता है।</p>
+                <p>स्थिर बुद्धि वाला व्यक्ति संकट में नहीं डगमगाता: जो अपनी बुद्धि को स्थिर रखता है, वह विपत्ति में भी संतुलित रहता है।</p>
+                <p>योग में स्थित होकर जीवन को संतुलित करो: योग के जरिए मन और शरीर का संतुलन बना सकते हैं, जो जीवन को सार्थक बनाता है।</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading3">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3" style="color: #ffd700; background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700;">
+                अध्याय 3: कर्म योग
+              </button>
+            </h2>
+            <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3" data-bs-parent="#gitaAccordion">
+              <div class="accordion-body bhagavad-gita-content">
+                <p>कर्म करना प्रकृति का नियम है, इससे बचना असंभव है: हर व्यक्ति को कर्म करना पड़ता है, निष्क्रियता संभव नहीं।</p>
+                <p>निष्काम कर्म से जीवन को पवित्र बनाओ: बिना फल की इच्छा के कर्म करने से मन शुद्ध और जीवन ऊँचा उठता है।</p>
+                <p>दूसरों के लिए प्रेरणा बनने वाला आचरण करो: श्रेष्ठ लोग अपने कर्मों से समाज को दिशा देते हैं।</p>
+                <p>स्वार्थ त्यागकर समाज के लिए कार्य करो: निःस्वार्थ सेवा से ही सच्ची शांति मिलती है।</p>
+                <p>कर्तव्य का पालन ही सच्चा धर्म है: अपने दायित्वों को निभाना धर्म का आधार है।</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading4">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4" style="color: #ffd700; background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700;">
+                अध्याय 4: ज्ञान कर्म संन्यास योग
+              </button>
+            </h2>
+            <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4" data-bs-parent="#gitaAccordion">
+              <div class="accordion-body bhagavad-gita-content">
+                <p>ज्ञान से कर्म के बंधन कटते हैं: सही ज्ञान हमें कर्मों के फल से मुक्त करता है।</p>
+                <p>यज्ञ भाव से किए गए कर्म मुक्ति देते हैं: कार्य को ईश्वर को समर्पित करने से वह पवित्र हो जाता है।</p>
+                <p>जो कर्म को अकर्म और अकर्म को कर्म देखता है, वही बुद्धिमान है: जो कर्म में निष्क्रियता और निष्क्रियता में कर्म देखता है, वह सच्चा ज्ञानी है।</p>
+                <p>ईश्वर हर युग में धर्म की रक्षा के लिए अवतार लेता है: जब अधर्म बढ़ता है, ईश्वर धर्म को स्थापित करने आता है।</p>
+                <p>ज्ञान और कर्म का संयोग सफलता की कुंजी है: ज्ञान के साथ कर्म करने से जीवन में संतुलन और सफलता मिलती है।</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading5">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5" style="color: #ffd700; background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700;">
+                अध्याय 5: कर्म संन्यास योग
+              </button>
+            </h2>
+            <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="heading5" data-bs-parent="#gitaAccordion">
+              <div class="accordion-body bhagavad-gita-content">
+                <p>संन्यास और कर्म योग दोनों मुक्ति के मार्ग हैं: संन्यास और कर्म योग अलग-अलग रास्ते हैं, पर दोनों का लक्ष्य एक है।</p>
+                <p>जो सुख-दुख को एक समान देखता है, वह मुक्त है: जो जीवन की द्वंद्वों से ऊपर उठता है, वह बंधनों से मुक्त हो जाता है।</p>
+                <p>आत्मा को जानने वाला व्यक्ति अहंकार से मुक्त होता है: आत्म-ज्ञान अहंकार को खत्म करता है।</p>
+                <p>शांति मन की स्थिरता से मिलती है: मन को स्थिर करने से ही सच्ची शांति प्राप्त होती है।</p>
+                <p>ईश्वर पर ध्यान लगाने से चेतना शुद्ध होती है: ईश्वर का चिंतन मन को पवित्र और ऊर्जावान बनाता है।</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading6">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse6" style="color: #ffd700; background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700;">
+                अध्याय 6: ध्यान योग
+              </button>
+            </h2>
+            <div id="collapse6" class="accordion-collapse collapse" aria-labelledby="heading6" data-bs-parent="#gitaAccordion">
+              <div class="accordion-body bhagavad-gita-content">
+                <p>मन को नियंत्रित करना सबसे बड़ी साधना है: मन को वश में करना कठिन है, पर यह योग का आधार है।</p>
+                <p>ध्यान से आत्मा और परमात्मा का मिलन होता है: ध्यान से आत्मा परमात्मा से जुड़ती है।</p>
+                <p>संयम और अभ्यास से सफलता मिलती है: नियमित अभ्यास और संयम से मन पर नियंत्रण होता है।</p>
+                <p>योगी सभी प्राणियों में समानता देखता है: योगी सभी में ईश्वर का अंश देखता है।</p>
+                <p>न नियमित साधना से जीवन में संतुलन आता है: रोज़ ध्यान करने से जीवन व्यवस्थित और शांत होता है।</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading7">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse7" aria-expanded="false" aria-controls="collapse7" style="color: #ffd700; background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700;">
+                अध्याय 7: ज्ञान विज्ञान योग
+              </button>
+            </h2>
+            <div id="collapse7" class="accordion-collapse collapse" aria-labelledby="heading7" data-bs-parent="#gitaAccordion">
+              <div class="accordion-body bhagavad-gita-content">
+                <p>ईश्वर प्रकृति और पुरुष का संयोजन है: ईश्वर प्रकृति और चेतना का मूल स्रोत है।</p>
+                <p>भक्ति से ईश्वर को जाना जा सकता है: भक्ति के जरिए ईश्वर से संबंध बनता है।</p>
+                <p>माया से पार पाना ज्ञान से संभव है: माया के भ्रम को ज्ञान ही तोड़ सकता है।</p>
+                <p>सच्चा भक्त ईश्वर में लीन हो जाता है: सच्ची भक्ति से भक्त और ईश्वर एक हो जाते हैं।</p>
+                <p>संसार ईश्वर की शक्ति का प्रकटीकरण है: यह विश्व ईश्वर की शक्ति और लीला का रूप है।</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading8">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse8" aria-expanded="false" aria-controls="collapse8" style="color: #ffd700; background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700;">
+                अध्याय 8: अक्षर ब्रह्म योग
+              </button>
+            </h2>
+            <div id="collapse8" class="accordion-collapse collapse" aria-labelledby="heading8" data-bs-parent="#gitaAccordion">
+              <div class="accordion-body bhagavad-gita-content">
+                <p>मृत्यु के समय ईश्वर का स्मरण मुक्ति देता है: अंतिम समय में ईश्वर को याद करने से आत्मा मुक्त होती है।</p>
+                <p>जीवन और मृत्यु का चक्र समझो: यह चक्र ईश्वर के नियम से चलता है।</p>
+                <p>परमात्मा अक्षर और अविनाशी है: ईश्वर नष्ट नहीं होता, वह अनंत है।</p>
+                <p>योग से चेतना को उच्च स्तर पर ले जाओ: योग चेतना को परमात्मा की ओर ले जाता है।</p>
+                <p>भक्ति और समर्पण से ईश्वर प्राप्त होता है: ईश्वर को पाने का सबसे आसान तरीका भक्ति है।</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading9">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse9" aria-expanded="false" aria-controls="collapse9" style="color: #ffd700; background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700;">
+                अध्याय 9: राज विद्या राज गुह्य योग
+              </button>
+            </h2>
+            <div id="collapse9" class="accordion-collapse collapse" aria-labelledby="heading9" data-bs-parent="#gitaAccordion">
+              <div class="accordion-body bhagavad-gita-content">
+                <p>ईश्वर की भक्ति सबसे श्रेष्ठ मार्ग है: भक्ति सभी मार्गों में सर्वोत्तम और सरल है।</p>
+                <p>संसार ईश्वर का खेल है, उसे समझो: यह विश्व ईश्वर की माया और सृष्टि का हिस्सा है।</p>
+                <p>जो ईश्वर को शरण लेता है, वह दुख से मुक्त होता है: ईश्वर की शरण में सारे कष्ट दूर हो जाते हैं।</p>
+                <p>निष्कपट भक्ति से ईश्वर प्रसन्न होता है: सच्चे और निःस्वार्थ भाव से की गई भक्ति ईश्वर को प्रिय है।</p>
+                <p>सभी धर्म ईश्वर की ओर ले जाते हैं: हर मार्ग अंततः ईश्वर तक पहुँचता है।</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading10">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse10" aria-expanded="false" aria-controls="collapse10" style="color: #ffd700; background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700;">
+                अध्याय 10: विभूति योग
+              </button>
+            </h2>
+            <div id="collapse10" class="accordion-collapse collapse" aria-labelledby="heading10" data-bs-parent="#gitaAccordion">
+              <div class="accordion-body bhagavad-gita-content">
+                <p>ईश्वर सभी शक्तियों और गुणों का स्रोत है: हर अच्छाई और शक्ति ईश्वर से उत्पन्न होती है।</p>
+                <p>प्रकृति में ईश्वर की महिमा दिखती है: सूर्य, चंद्र, और प्रकृति में ईश्वर की झलक है।</p>
+                <p>भक्त ईश्वर की विभूतियों को पहचानता है: सच्चा भक्त ईश्वर को हर रूप में देखता है।</p>
+                <p>ईश्वर अनंत रूपों में विद्यमान है: ईश्वर के रूप अनगिनत और सर्वव्यापी हैं।</p>
+                <p>भक्ति से ईश्वर का दर्शन संभव है: भक्ति से ईश्वर का साक्षात्कार होता है।</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading11">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse11" aria-expanded="false" aria-controls="collapse11" style="color: #ffd700; background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700;">
+                अध्याय 11: विश्वरूप दर्शन योग
+              </button>
+            </h2>
+            <div id="collapse11" class="accordion-collapse collapse" aria-labelledby="heading11" data-bs-parent="#gitaAccordion">
+              <div class="accordion-body bhagavad-gita-content">
+                <p>ईश्वर का विश्वरूप भय और विस्मय उत्पन्न करता है: ईश्वर का विराट रूप देखकर अर्जुन आश्चर्यचकित और भयभीत होता है।</p>
+                <p>सच्चा भक्त ही ईश्वर के विराट रूप को देख सकता है: केवल भक्ति से ही ईश्वर का यह रूप समझ आता है।</p>
+                <p>समय और काल ईश्वर के अधीन हैं: ईश्वर ही समय का नियंत्रक और संहारक है।</p>
+                <p>भक्ति और शरणागति से ईश्वर का स्वरूप समझ आता है: समर्पण से ईश्वर का असली रूप प्रकट होता है।</p>
+                <p>ईश्वर सर्वव्यापी और सर्वशक्तिमान है: ईश्वर हर जगह और हर शक्ति का आधार है।</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading12">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse12" aria-expanded="false" aria-controls="collapse12" style="color: #ffd700; background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700;">
+                अध्याय 12: भक्ति योग
+              </button>
+            </h2>
+            <div id="collapse12" class="accordion-collapse collapse" aria-labelledby="heading12" data-bs-parent="#gitaAccordion">
+              <div class="accordion-body bhagavad-gita-content">
+                <p>भक्ति सबसे सरल और प्रभावी मार्ग है: भक्ति से बिना जटिलता के ईश्वर मिलता है।</p>
+                <p>ईश्वर का ध्यान करने वाला भक्त प्रिय है: जो ईश्वर को याद करता है, वह ईश्वर को प्रिय होता है।</p>
+                <p>समर्पण से मन की शांति मिलती है: ईश्वर को सब कुछ सौंपने से मन शांत रहता है।</p>
+                <p>सभी प्राणियों में ईश्वर को देखो: हर जीव में ईश्वर का अंश है।</p>
+                <p>भक्ति में शुद्ध भाव ही पर्याप्त है: सच्चे मन से की गई भक्ति ही काफी है।</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading13">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse13" aria-expanded="false" aria-controls="collapse13" style="color: #ffd700; background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700;">
+                अध्याय 13: क्षेत्र क्षेत्रज्ञ विभाग योग
+              </button>
+            </h2>
+            <div id="collapse13" class="accordion-collapse collapse" aria-labelledby="heading13" data-bs-parent="#gitaAccordion">
+              <div class="accordion-body bhagavad-gita-content">
+                <p>शरीर क्षेत्र है, आत्मा क्षेत्रज्ञ: शरीर भौतिक है, आत्मा उसका जानने वाला।</p>
+                <p>ज्ञान से आत्मा और परमात्मा का भेद समझो: ज्ञान से आत्मा और ईश्वर का अंतर स्पष्ट होता है।</p>
+                <p>प्रकृति और पुरुष का संयोग संसार बनाता है: प्रकृति और चेतना से यह विश्व बना है।</p>
+                <p>जो आत्मा को जानता है, वह मुक्त हो जाता है: आत्म-ज्ञान से बंधन टूटते हैं।</p>
+                <p>निर्लिप्त रहकर जीवन जियो: कर्मों में शामिल होकर भी उनसे अलग रहो।</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading14">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse14" aria-expanded="false" aria-controls="collapse14" style="color: #ffd700; background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700;">
+                अध्याय 14: गुण त्रय विभाग योग
+              </button>
+            </h2>
+            <div id="collapse14" class="accordion-collapse collapse" aria-labelledby="heading14" data-bs-parent="#gitaAccordion">
+              <div class="accordion-body bhagavad-gita-content">
+                <p>सत, रज, और तम तीन गुण जीवन को प्रभावित करते हैं: ये गुण मन और व्यवहार को नियंत्रित करते हैं।</p>
+                <p>गुणों से परे जाना मुक्ति है: इन गुणों से ऊपर उठने से आत्मा मुक्त होती है।</p>
+                <p>सत्व गुण से ज्ञान और शांति मिलती है: सत्व से जीवन में प्रकाश और शांति आती है।</p>
+                <p>रज और तम से बंधन उत्पन्न होते हैं: रज से इच्छाएँ और तम से अज्ञान बढ़ता है।</p>
+                <p>आत्मा गुणों से अछूती है: आत्मा इन गुणों से परे और शुद्ध है।</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading15">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse15" aria-expanded="false" aria-controls="collapse15" style="color: #ffd700; background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700;">
+                अध्याय 15: पुरुषोत्तम योग
+              </button>
+            </h2>
+            <div id="collapse15" class="accordion-collapse collapse" aria-labelledby="heading15" data-bs-parent="#gitaAccordion">
+              <div class="accordion-body bhagavad-gita-content">
+                <p>संसार एक वृक्ष है, जिसकी जड़ें ईश्वर में हैं: यह विश्व उल्टा वृक्ष है, जिसका मूल ईश्वर है।</p>
+                <p>पुरुषोत्तम ही परम सत्य है: ईश्वर ही सर्वोच्च और सत्य है।</p>
+                <p>संसार से वैराग्य मुक्ति का मार्ग है: संसार से detachment से मुक्ति मिलती है।</p>
+                <p>ईश्वर में लीन होना जीवन का लक्ष्य है: परमात्मा में विलय ही जीवन का उद्देश्य है।</p>
+                <p>आत्मा का परमात्मा से संबंध अनादि है: आत्मा और ईश्वर का नाता शाश्वत है।</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading16">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse16" aria-expanded="false" aria-controls="collapse16" style="color: #ffd700; background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700;">
+                अध्याय 16: दैवासुर संपद् विभाग योग
+              </button>
+            </h2>
+            <div id="collapse16" class="accordion-collapse collapse" aria-labelledby="heading16" data-bs-parent="#gitaAccordion">
+              <div class="accordion-body bhagavad-gita-content">
+                <p>दैवी गुण मुक्ति की ओर ले जाते हैं: सत्य, दया जैसे गुण आत्मा को ऊँचा उठाते हैं।</p>
+                <p>आसुरी गुण बंधन का कारण बनते हैं: अहंकार, क्रोध से मन भटकता है।</p>
+                <p>सत्य और धर्म का पालन करो: धर्म और सत्य जीवन का आधार हैं।</p>
+                <p>लोभ और क्रोध से बचो: ये मन को अशांत और पतन की ओर ले जाते हैं।</p>
+                <p>शास्त्र जीवन का मार्गदर्शक है: शास्त्रों का पालन सही दिशा देता है।</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading17">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse17" aria-expanded="false" aria-controls="collapse17" style="color: #ffd700; background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700;">
+                अध्याय 17: श्रद्धा त्रय विभाग योग
+              </button>
+            </h2>
+            <div id="collapse17" class="accordion-collapse collapse" aria-labelledby="heading17" data-bs-parent="#gitaAccordion">
+              <div class="accordion-body bhagavad-gita-content">
+                <p>श्रद्धा जीवन के कार्यों को निर्धारित करती है: आपकी श्रद्धा आपके जीवन को आकार देती है।</p>
+                <p>सात्विक श्रद्धा शांति देती है: सात्विक श्रद्धा से मन शुद्ध और शांत होता है।</p>
+                <p>राजसिक और तामसिक श्रद्धा अशांति लाती है: ये श्रद्धाएँ इच्छा और अज्ञान से भरी होती हैं।</p>
+                <p>आहार और व्यवहार श्रद्धा को प्रभावित करते हैं: जो खाते और करते हैं, वही श्रद्धा बनाता है।</p>
+                <p>"ॐ तत् सत्" ईश्वर का स्मरण है: यह मंत्र ईश्वर को समर्पण का प्रतीक है।</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading18">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse18" aria-expanded="false" aria-controls="collapse18" style="color: #ffd700; background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700;">
+                अध्याय 18: मोक्ष संन्यास योग
+              </button>
+            </h2>
+            <div id="collapse18" class="accordion-collapse collapse" aria-labelledby="heading18" data-bs-parent="#gitaAccordion">
+              <div class="accordion-body bhagavad-gita-content">
+                <p>कर्तव्य का पालन ही सच्चा त्याग है: कर्तव्य छोड़ना नहीं, उसे निष्काम भाव से करना त्याग है।</p>
+                <p>ज्ञान, कर्म और भक्ति से मोक्ष मिलता है: ये तीनों मार्ग मुक्ति की ओर ले जाते हैं।</p>
+                <p>ईश्वर की शरण में सब कुछ समर्पित करो: ईश्वर को सब सौंपने से बंधन टूटते हैं।</p>
+                <p>मन को नियंत्रित कर आत्मा को जानो: मन पर काबू से आत्म-ज्ञान मिलता है।</p>
+                <p>संन्यास और त्याग में अंतर समझो: संन्यास बाहरी त्याग है, त्याग भीतरी।</p>
+                <p>सभी कर्म ईश्वर को अर्पित करो: कर्मों को ईश्वर के लिए करने से मुक्ति मिलती है।</p>
+                <p>जो ईश्वर पर भरोसा करता है, वह मुक्त हो जाता है: विश्वास से डर और संदेह खत्म होते हैं।</p>
+                <p>धर्म के लिए युद्ध करना भी कर्तव्य है: धर्म की रक्षा के लिए संघर्ष करना जरूरी है।</p>
+                <p>आत्म-संयम से जीवन सफल होता है: संयम से जीवन में शक्ति और दिशा आती है।</p>
+                <p>ईश्वर का निर्णय सर्वोपरि है: ईश्वर की इच्छा ही अंतिम सत्य है।</p>
+                <p>कर्मफल ईश्वर के हाथ में छोड़ दो: फल की चिंता छोड़ने से मन मुक्त रहता है।</p>
+                <p>सत्य और न्याय के लिए खड़े हो जाओ: अधर्म के खिलाफ लड़ना धर्म है।</p>
+                <p>जीवन का उद्देश्य आत्म-साक्षात्कार है: आत्मा को जानना ही जीवन का लक्ष्य है।</p>
+                <p>भगवान का संदेश सुनो और उस पर चलो: श्रीकृष्ण का उपदेश जीवन का मार्गदर्शन है।</p>
+                <p>पूर्ण समर्पण से परम शांति प्राप्त होती है: ईश्वर में पूर्ण समर्पण से शांति और मोक्ष मिलता है।</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="mt-4" style="color: #ffd700;">प्रीमियम निकासी करें</h2>
+      <div class="form-group">
+        <input type="text" id="withdrawPhone" placeholder="फोन नंबर" required class="form-control mb-2">
+        <input type="text" id="withdrawUpi" placeholder="UPI ID" required class="form-control mb-2">
+        <input type="number" id="withdrawAmount" placeholder="राशि" required class="form-control mb-2">
+        <button onclick="submitWithdrawal()" class="btn btn-warning">प्रीमियम निकासी रिक्वेस्ट करें</button>
+        <p class="info-text">नोट: वॉलेट में कम से कम 100 रुपये होने चाहिए।</p>
+      </div>
+
+      <button onclick="logout()" class="btn btn-danger mt-4">प्रीमियम लॉगआउट</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    async function loadUserData() {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert('कृपया लॉगिन करें');
+        window.location.href = '/login.html';
+        return;
+      }
+      try {
+        const response = await fetch(`/user/${localStorage.getItem('loggedInPhone')}`, {
+          method: 'GET',
+          headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        const user = await response.json();
+        if (!user.message) {
+          document.getElementById('referCode').textContent = localStorage.getItem('personalReferCode') || '';
+          document.getElementById('walletBalance').textContent = user.wallet || 0;
+          document.getElementById('referralCommission').textContent = user.referralCommission || 0;
+
+          if (user.hasPaid) {
+            document.getElementById('premiumNote').style.display = 'none';
+            document.getElementById('userDashboard').style.display = 'block';
+            document.getElementById('bhagavadGitaContent').style.display = 'block';
+            loadReferralDetails();
+          }
+        } else {
+          alert('यूज़र नहीं मिला, कृपया लॉगिन करें');
+          window.location.href = '/login.html';
+        }
+      } catch (error) {
+        alert('टोकन अमान्य है, कृपया फिर से लॉगिन करें');
+        window.location.href = '/login.html';
+      }
+    }
+
+    async function makePayment() {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert('कृपया लॉगिन करें');
+        return;
+      }
+      try {
+        const response = await fetch('/pay', {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error('पेमेंट रिक्वेस्ट विफल');
+        }
+        console.log('Paytm Response:', data);
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = 'https://securegw-stage.paytm.in/order/process';
+        for (let key in data) {
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = key;
+          input.value = data[key];
+          form.appendChild(input);
+        }
+        document.body.appendChild(form);
+        form.submit();
+      } catch (error) {
+        alert(`पेमेंट में त्रुटि: ${error.message}`);
+        console.error('Paytm Error:', error);
+      }
+    }
+
+    async function submitWithdrawal() {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert('कृपया लॉगिन करें');
+        return;
+      }
+      const phone = document.getElementById('withdrawPhone').value;
+      const upiId = document.getElementById('withdrawUpi').value;
+      const amount = document.getElementById('withdrawAmount').value;
+      const response = await fetch('/withdraw', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ phone, upiId, amount })
+      });
+      const data = await response.json();
+      alert(data.message);
+    }
+
+    async function loadReferralDetails() {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert('कृपया लॉगिन करें');
+        return;
+      }
+      const phone = localStorage.getItem('loggedInPhone');
+      if (phone) {
+        const response = await fetch(`/user/${phone}`, {
+          method: 'GET',
+          headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        const user = await response.json();
+        if (user.hasPaid) {
+          if (user.referChain && user.referChain.length > 0) {
+            const commissionRates = [0.25, 0.15, 0.10, 0.08, 0.06, 0.05, 0.04, 0.03, 0.02, 0.01];
+            let referralDetails = '';
+            user.referChain.forEach((referral, index) => {
+              if (index < 10) {
+                referralDetails += `<p style="color: #ffd700; font-size: 1.1rem;">लेवल ${index + 1}: ${referral.phone} - ${Math.round(100 * commissionRates[index])} रुपये कमिशन</p>`;
+              }
+            });
+            document.getElementById('referralDetails').innerHTML = referralDetails || '<p style="color: #ffd700;">कोई रेफरल नहीं</p>';
+          } else {
+            document.getElementById('referralDetails').innerHTML = '<p style="color: #ffd700;">कोई रेफरल नहीं</p>';
+          }
+        }
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('loggedInPhone');
+      localStorage.removeItem('personalReferCode');
+      alert('प्रीमियम लॉगआउट सफल');
+      window.location.href = '/login.html';
+    }
+
+    window.onload = loadUserData;
+  </script>
+</body>
+</html>
