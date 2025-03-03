@@ -1,5 +1,5 @@
-const express = require('express');
 const mongoose = require('mongoose');
+const express = require('express');
 const PaytmChecksum = require('paytmchecksum');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -10,7 +10,9 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // MongoDB Connection
-mongoose.connect('mongodb://localhost:27017/goalux');
+mongoose.connectmongoose.connect('mongodb+srv://himanshuchouhan7247:K034M3uoZbgMWcE9@cluster0.szwiz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0retryWrites=true&w=majority')
+  .then(() => console.log('Connected to MongoDB Atlas'))
+  .catch(err => console.error('Could not connect to MongoDB Atlas', err));
 
 // User Schema
 const userSchema = new mongoose.Schema({
